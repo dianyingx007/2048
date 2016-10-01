@@ -29,4 +29,10 @@ body{
 	height: 21%;
 	background-color: #cabdbd;
 	border-radius: 15px;
+	font-size: 2rem;
+	line-height: 2rem;
+}
+.t8,.t16,.t32,.t64,.t128,.t256,.t512,.t1024,.t2048,.t4096,.t8192,.t16384{
+	color: white;
+	background-color: #AA0088;
 }
