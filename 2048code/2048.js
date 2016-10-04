@@ -44,22 +44,66 @@ var game = {
         console.log(this.data[1]);
         console.log(this.data[2]);
         console.log(this.data[3]);
-    },
-    moveleft:function(){
-        if(this.canLeft()){
-            console.log('canLeft');
-            for(var i=0;i<4;i++){
-                this.moveLeftInRow(i);
-            }
-            this.randomNum();
-            this.updateView();
+        console.log('score:'+this.score);
+        if(this.isGameOver()){
+            this.state = 0;
         }
     },
-    canLeft:function(){
+    isGameOver:function(){
+        if(!this.isFull()){
+            return 0;
+        }
+        for(var i=0;i<4;i++){
+            for(var j=0;j<4;j++){
+                if(j<3){
+                    if(this.data[i][j]===this.data[i][j+1]){
+                        return 0;
+                    }
+                }
+                if(i<3){
+                    if(this.data[i][j]===this.data[i+1][j]){
+                        return 0;
+                    }
+                }
+            }
+        }
         return 1;
     },
+    moveleft:function(){
+        for(var i=0;i<4;i++){
+            this.moveLeftInRow(i);
+        }
+        this.randomNum();
+        this.updateView();
+    },
     moveLeftInRow:function(i){
-        
+        for(var j=0;j<3;j++){
+            var nextCol = this.getNextRight(i,j);
+            if(nextCol===-1){
+                break;
+            }else {
+                if(this.data[i][j]===0){
+                    this.data[i][j]=this.data[i][nextCol];
+                    this.data[i][nextCol]=0;
+                    j--;
+                }else if(this.data[i][j]===this.data[i][nextCol]){
+                    this.data[i][j]*=2;
+                    this.data[i][nextCol]=0;
+                    this.score+=this.data[i][j];
+                }
+            }
+        }
+    },
+    getNextRight:function(i,j){
+        for(var k=j+1;k<4;k++){
+            if(this.data[i][k]!=0){
+                return k;
+            }
+        }
+        return -1;//-1表示右边不存在数字
     }
 }
+//js输入方法：prompt（“提示信息”，预定输入信息）
 game.start();
+console.log('moveleft');
+game.moveleft();
