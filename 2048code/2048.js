@@ -205,7 +205,7 @@ var game = {
 
 //js输入方法：prompt（“提示信息”，预定输入信息）
 game.start();
-for(;this.state;){
+for(;game.state;){
     console.log('moveleft');
     game.moveLeft();
     console.log('moveRight');
