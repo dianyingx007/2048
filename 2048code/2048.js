@@ -79,7 +79,7 @@ var game = {
     moveLeftInRow:function(i){
         for(var j=0;j<3;j++){
             var nextCol = this.getNextRight(i,j);
-            if(nextCol===-1){
+            if(nextCol===-1){//-1表示位置不存在
                 break;
             }else {
                 if(this.data[i][j]===0){
