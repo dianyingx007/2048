@@ -134,6 +134,39 @@ var game = {
             }
         }
         return -1;
+    },
+    moveTop:function(){
+        for(var j=0;j<4;j++){
+            this.moveTopInCol(j);
+        }
+        this.randomNum();
+        this.updateView();
+    },
+    moveTopInCol:function(j){
+        for(var i=0;i<3;i++){
+            var nextRow=this.getNextBottom(i,j);
+            if(nextRow===-1){
+                break;
+            }else {
+                if(this.data[i][j]===0){
+                    this.data[i][j]=this.data[nextRow][j];
+                    this.data[nextRow][j]=0;
+                    i--;
+                }else if(this.data[i][j]===this.data[nextRow][j]){
+                    this.data[i][j]*=2;
+                    this.data[nextRow][j]=0;
+                    this.score+=this.data[i][j];
+                }
+            }
+        }
+    },
+    getNextBottom:function(i,j){
+        for(var k=i+1;k<4;k++){
+            if(this.data[k][j]!=0){
+                return k;
+            }
+        }
+        return -1;
     }
 }
 
@@ -143,3 +176,5 @@ console.log('moveleft');
 game.moveLeft();
 console.log('moveRight');
 game.moveRight();
+console.log('moveTop');
+game.moveTop();
