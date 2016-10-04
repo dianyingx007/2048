@@ -69,7 +69,7 @@ var game = {
         }
         return 1;
     },
-    moveleft:function(){
+    moveLeft:function(){
         for(var i=0;i<4;i++){
             this.moveLeftInRow(i);
         }
@@ -101,9 +101,45 @@ var game = {
             }
         }
         return -1;//-1表示右边不存在数字
+    },
+    moveRight:function(){
+        for(var i=0;i<4;i++){
+            this.moveRightInRow(i);
+        }
+        this.randomNum();
+        this.updateView();
+    },
+    moveRightInRow:function(i){
+        for(var j=3;j>0;j--){
+            var nextCol = this.getNextLeft(i,j);
+            if(nextCol===-1){
+                break;
+            }else{
+                if(this.data[i][j]===0){
+                    this.data[i][j]=this.data[i][nextCol];
+                    this.data[i][nextCol]=0;
+                    j++;
+                }else if(this.data[i][j]===this.data[i][nextCol]){
+                    this.data[i][j]*=2;
+                    this.data[i][nextCol]=0;
+                    this.score+=this.data[i][j];
+                }
+            }
+        }
+    },
+    getNextLeft:function(i,j){
+        for(var k=j-1;k>=0;k--){
+            if(this.data[i][k]!=0){
+                return k;
+            }
+        }
+        return -1;
     }
 }
+
 //js输入方法：prompt（“提示信息”，预定输入信息）
 game.start();
 console.log('moveleft');
-game.moveleft();
+game.moveLeft();
+console.log('moveRight');
+game.moveRight();
