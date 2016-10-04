@@ -167,14 +167,52 @@ var game = {
             }
         }
         return -1;
+    },
+    moveBottom:function(){
+        for(var j=0;j<4;j++){
+            this.moveBottomInCol(j);
+        }
+        this.randomNum();
+        this.updateView();
+    },
+    moveBottomInCol:function(j){
+        for(var i=3;i>=0;i--){
+            var nextRow=this.getNextTop(i,j);
+            if(nextRow===-1){
+                break;
+            }else {
+                if(this.data[i][j]===0){
+                    this.data[i][j]=this.data[nextRow][j];
+                    this.data[nextRow][j]=0;
+                    i++;
+                }else if(this.data[i][j]===this.data[nextRow][j]){
+                    this.data[i][j]*=2;
+                    this.data[nextRow][j]=0;
+                    this.score+=this.data[i][j];
+                }
+            }
+        }
+    },
+    getNextTop:function(i,j){
+        for(var k=i-1;k>=0;k--){
+            if(this.data[k][j]!=0){
+                return k;
+            }
+        }
+        return -1;
     }
 }
 
 //js输入方法：prompt（“提示信息”，预定输入信息）
 game.start();
-console.log('moveleft');
-game.moveLeft();
-console.log('moveRight');
-game.moveRight();
-console.log('moveTop');
-game.moveTop();
+for(;this.state;){
+    console.log('moveleft');
+    game.moveLeft();
+    console.log('moveRight');
+    game.moveRight();
+    console.log('moveTop');
+    game.moveTop();
+    console.log('moveBottom');
+    game.moveBottom();
+}
+console.log('isGameOver');
