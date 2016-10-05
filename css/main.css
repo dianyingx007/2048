@@ -7,7 +7,7 @@ body{
 	text-align: center;
 }
 .score{
-	font-size: 0.8rem;
+	font-size: 0.75rem;
 	font-weight: 900;
 	font-family: "微软雅黑";
 	margin-top: 1rem;
@@ -22,13 +22,13 @@ body{
 	width: 9rem;
 	height: 9rem;
 	background-color: #aa8e8e;
-	border-radius: 15px;
+	border-radius: 10px;
 }
 .grid{
 	width: 1.8rem;
 	height: 1.8rem;
 	background-color: #cabdbd;
-	border-radius: 15px;
+	border-radius: 10px;
 	margin-left: 0.36rem;
 	margin-top: 0.36rem;
 	float: left;
@@ -44,7 +44,7 @@ body{
 .cell{
 	width: 1.8rem;
 	height: 1.8rem;
-	border-radius: 15px;
+	border-radius: 10px;
 	font-size: 1.4rem;
 	line-height: 1.8rem;
 	position: absolute;
@@ -98,3 +98,40 @@ body{
 .t8,.t16,.t32,.t64,.t128,.t256,.t512,.t1024,.t2048,.t4096,.t8192,.t16384{
 	color: white;
 }
+#gameover{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.transparent{
+	background-color: #555;
+	width: 100%;
+	height: 100%;
+	opacity: 0.5;
+}
+.overmessage {
+	background-color: white;
+	font-size: 0.8rem;
+	font-weight: 900;
+	font-family: "微软雅黑";
+	border: 2px solid #eb5b5b;
+	border-radius: 10px;
+	width: 5rem;
+	padding: 0.2rem 0;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+}
+#restart{
+	font-size: 0.7rem;
+	font-weight: 700;
+	font-family: "微软雅黑";
+	border: 2px solid #7e6ae3;
+	border-radius: 5px;
+	background-color: #5e42e8;
+	cursor: pointer;
+}
+

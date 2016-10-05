@@ -11,6 +11,8 @@ var game = {
         ];
         this.score = 0;
         this.state = 1;
+        var gameover=document.getElementById("gameover");
+        gameover.style.display="none";
         this.randomNum();
         this.randomNum();
         this.updateView();
@@ -51,6 +53,10 @@ var game = {
         getscore.innerHTML = this.score;
         if(this.isGameOver()){
             this.state = 0;
+            var gameover=document.getElementById('gameover');
+        	gameover.style.display="block";
+        	var finalscore=document.getElementById('finalscore');
+        	finalscore.innerHTML=this.score;
         }
     },
     isGameOver:function(){
@@ -81,8 +87,13 @@ var game = {
             }
         }
         if(flag===1){
-        	this.randomNum();
-        	this.updateView();
+        	this.state = 2;
+        	animation.move();
+        	setTimeout(function(){
+        		game.state = 1;
+        		game.randomNum();
+        		game.updateView();
+        	},animation.times*animation.interval);
         };
     },
     moveLeftInRow:function(i){
@@ -95,12 +106,14 @@ var game = {
                 if(this.data[i][j]===0){
                     this.data[i][j]=this.data[i][nextCol];
                     this.data[i][nextCol]=0;
+                    animation.addTask("c"+i+nextCol,"c"+i+j);
                     j--;
                     flag=1;
                 }else if(this.data[i][j]===this.data[i][nextCol]){
                     this.data[i][j]*=2;
                     this.data[i][nextCol]=0;
                     this.score+=this.data[i][j];
+                    animation.addTask("c"+i+nextCol,"c"+i+j);
                     flag=1;
                 }
             }
@@ -123,8 +136,13 @@ var game = {
             }
         }
         if(flag===1){
-        	this.randomNum();
-        	this.updateView();
+        	this.state=2;
+        	animation.move();
+        	setTimeout(function(){
+        		game.state=1;
+        		game.randomNum();
+        		game.updateView();
+        	},animation.times*animation.interval);
         }
     },
     moveRightInRow:function(i){
@@ -137,12 +155,14 @@ var game = {
                 if(this.data[i][j]===0){
                     this.data[i][j]=this.data[i][nextCol];
                     this.data[i][nextCol]=0;
+                    animation.addTask("c"+i+nextCol,"c"+i+j);
                     j++;
                     flag=1;
                 }else if(this.data[i][j]===this.data[i][nextCol]){
                     this.data[i][j]*=2;
                     this.data[i][nextCol]=0;
                     this.score+=this.data[i][j];
+                    animation.addTask("c"+i+nextCol,"c"+i+j);
                     flag=1;
                 }
             }
@@ -165,8 +185,13 @@ var game = {
             }
         }
         if(flag===1){
-        	this.randomNum();
-        	this.updateView();
+        	this.state=2;
+        	animation.move();
+        	setTimeout(function(){
+        		game.state=1;
+        		game.randomNum();
+        		game.updateView();
+        	},animation.times*animation.interval);
         }
     },
     moveTopInCol:function(j){
@@ -179,12 +204,14 @@ var game = {
                 if(this.data[i][j]===0){
                     this.data[i][j]=this.data[nextRow][j];
                     this.data[nextRow][j]=0;
+                    animation.addTask("c"+nextRow+j,"c"+i+j);
                     i--;
                     flag=1;
                 }else if(this.data[i][j]===this.data[nextRow][j]){
                     this.data[i][j]*=2;
                     this.data[nextRow][j]=0;
                     this.score+=this.data[i][j];
+                    animation.addTask("c"+nextRow+j,"c"+i+j);
                     flag=1;
                 }
             }
@@ -207,8 +234,13 @@ var game = {
             }
         }
         if(flag===1){
-        	this.randomNum();
-        	this.updateView();
+        	this.state=2;
+        	animation.move();
+        	setTimeout(function(){
+        		game.state=1;
+        		game.randomNum();
+        		game.updateView();
+        	},animation.times*animation.interval);
         }
     },
     moveBottomInCol:function(j){
@@ -221,12 +253,14 @@ var game = {
                 if(this.data[i][j]===0){
                     this.data[i][j]=this.data[nextRow][j];
                     this.data[nextRow][j]=0;
+                    animation.addTask("c"+nextRow+j,"c"+i+j);
                     i++;
                     flag=1;
                 }else if(this.data[i][j]===this.data[nextRow][j]){
                     this.data[i][j]*=2;
                     this.data[nextRow][j]=0;
                     this.score+=this.data[i][j];
+                    animation.addTask("c"+nextRow+j,"c"+i+j);
                     flag=1;
                 }
             }
@@ -261,4 +295,58 @@ document.onkeydown = function(){
 			game.start();
 		}
 	}
+};
+
+//实现移动动画
+var animation = {
+	times: 10,//动画分成的次数
+	interval: 10, //动画每次的间隔时间
+	timer: null,//保持定时器id
+	tasks: [],
+	addTask:function(source,target){
+		var div1 = document.getElementById(source);
+		var div2 = document.getElementById(target);
+		var topStep = (div2.offsetTop-div1.offsetTop)/this.times;
+		var leftStep = (div2.offsetLeft-div1.offsetLeft)/this.times;
+		var task = new taskClass(div1,topStep,leftStep);
+		this.tasks.push(task);
+	},
+	move:function(){
+		this.timer=setInterval(function(){
+			for(var i=0;i<animation.tasks.length;i++){
+				animation.tasks[i].moveOneStep();
+			}
+			animation.times--;
+			if(animation.times===0){
+				for(var i=0;i<animation.tasks.length;i++){
+					animation.tasks[i].clear();
+				}
+				clearInterval(animation.timer);
+				animation.tasks=[];
+				animation.times=10;
+				animation.timer=null;
+				
+			}
+		},this.interval);
+	}
 }
+function taskClass(div,topStep,leftStep){
+	this.div=div;
+	this.topStep=topStep;
+	this.leftStep=leftStep;
+}
+taskClass.prototype.moveOneStep=function(){
+	this.div.style.top=this.div.offsetTop+this.topStep+"px";
+	this.div.style.left=this.div.offsetLeft+this.leftStep+"px";
+}
+taskClass.prototype.clear=function(){
+	//还原到原来位置
+	this.div.style.top="";
+	this.div.style.left="";
+}
+
+//button点击重新开始
+var restart=document.getElementById("restart");
+restart.onclick = function(){
+	game.start();
+};
