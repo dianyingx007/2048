@@ -70,13 +70,19 @@ var game = {
         return 1;
     },
     moveLeft:function(){
+    	var flag=0;//判断是否有移动
         for(var i=0;i<4;i++){
-            this.moveLeftInRow(i);
+            if(this.moveLeftInRow(i)){
+            	flag=1;
+            }
         }
-        this.randomNum();
-        this.updateView();
+        if(flag===1){
+        	this.randomNum();
+        	this.updateView();
+        };
     },
     moveLeftInRow:function(i){
+    	var flag=0;
         for(var j=0;j<3;j++){
             var nextCol = this.getNextRight(i,j);
             if(nextCol===-1){//-1表示位置不存在
@@ -86,13 +92,16 @@ var game = {
                     this.data[i][j]=this.data[i][nextCol];
                     this.data[i][nextCol]=0;
                     j--;
+                    flag=1;
                 }else if(this.data[i][j]===this.data[i][nextCol]){
                     this.data[i][j]*=2;
                     this.data[i][nextCol]=0;
                     this.score+=this.data[i][j];
+                    flag=1;
                 }
             }
         }
+        return flag;
     },
     getNextRight:function(i,j){
         for(var k=j+1;k<4;k++){
@@ -103,13 +112,19 @@ var game = {
         return -1;//-1表示右边不存在数字
     },
     moveRight:function(){
+    	var flag=0;
         for(var i=0;i<4;i++){
-            this.moveRightInRow(i);
+            if(this.moveRightInRow(i)){
+            	flag=1;
+            }
         }
-        this.randomNum();
-        this.updateView();
+        if(flag===1){
+        	this.randomNum();
+        	this.updateView();
+        }
     },
     moveRightInRow:function(i){
+    	var flag=0;
         for(var j=3;j>0;j--){
             var nextCol = this.getNextLeft(i,j);
             if(nextCol===-1){
@@ -119,13 +134,16 @@ var game = {
                     this.data[i][j]=this.data[i][nextCol];
                     this.data[i][nextCol]=0;
                     j++;
+                    flag=1;
                 }else if(this.data[i][j]===this.data[i][nextCol]){
                     this.data[i][j]*=2;
                     this.data[i][nextCol]=0;
                     this.score+=this.data[i][j];
+                    flag=1;
                 }
             }
         }
+        return flag;
     },
     getNextLeft:function(i,j){
         for(var k=j-1;k>=0;k--){
@@ -136,13 +154,19 @@ var game = {
         return -1;
     },
     moveTop:function(){
+    	var flag=0;
         for(var j=0;j<4;j++){
-            this.moveTopInCol(j);
+            if(this.moveTopInCol(j)){
+            	flag=1;
+            }
         }
-        this.randomNum();
-        this.updateView();
+        if(flag===1){
+        	this.randomNum();
+        	this.updateView();
+        }
     },
     moveTopInCol:function(j){
+    	var flag=0;
         for(var i=0;i<3;i++){
             var nextRow=this.getNextBottom(i,j);
             if(nextRow===-1){
@@ -152,13 +176,16 @@ var game = {
                     this.data[i][j]=this.data[nextRow][j];
                     this.data[nextRow][j]=0;
                     i--;
+                    flag=1;
                 }else if(this.data[i][j]===this.data[nextRow][j]){
                     this.data[i][j]*=2;
                     this.data[nextRow][j]=0;
                     this.score+=this.data[i][j];
+                    flag=1;
                 }
             }
         }
+        return flag;
     },
     getNextBottom:function(i,j){
         for(var k=i+1;k<4;k++){
@@ -169,13 +196,19 @@ var game = {
         return -1;
     },
     moveBottom:function(){
+    	var flag=0;
         for(var j=0;j<4;j++){
-            this.moveBottomInCol(j);
+            if(this.moveBottomInCol(j)){
+            	flag=1;
+            }
         }
-        this.randomNum();
-        this.updateView();
+        if(flag===1){
+        	this.randomNum();
+        	this.updateView();
+        }
     },
     moveBottomInCol:function(j){
+    	var flag=0;
         for(var i=3;i>=0;i--){
             var nextRow=this.getNextTop(i,j);
             if(nextRow===-1){
@@ -185,19 +218,22 @@ var game = {
                     this.data[i][j]=this.data[nextRow][j];
                     this.data[nextRow][j]=0;
                     i++;
+                    flag=1;
                 }else if(this.data[i][j]===this.data[nextRow][j]){
                     this.data[i][j]*=2;
                     this.data[nextRow][j]=0;
                     this.score+=this.data[i][j];
+                    flag=1;
                 }
             }
         }
+        return flag;
     },
     getNextTop:function(i,j){
         for(var k=i-1;k>=0;k--){
             if(this.data[k][j]!=0){
                 return k;
-            }
+           }
         }
         return -1;
     }
