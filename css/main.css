@@ -12,6 +12,11 @@ body{
 	font-family: "微软雅黑";
 	margin-top: 1rem;
 }
+.game2048{
+	height: 9rem;
+	position: relative;
+	top: 0px;
+}
 .container {
 	margin-left: 50%;
 	transform: translate(-50%,0);
@@ -25,14 +30,47 @@ body{
 	align-content: space-around;
 }
 .grid{
-	width: 21%;
-	height: 21%;
+	width: 1.81rem;
+	height: 1.81rem;
 	background-color: #cabdbd;
 	border-radius: 15px;
-	font-size: 2rem;
+}
+.container2 {
+	margin-left: 50%;
+	transform: translate(-50%,0);
+	width: 9rem;
+	height: 9rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: space-around;
+	position: absolute;
+	top: 0px;
+}
+.cell{
+	width: 1.81rem;
+	height: 1.81rem;
+	background-color: #cabdbd;
+	border-radius: 15px;
+	font-size: 1.4rem;
 	line-height: 2rem;
+}
+.t8,.t16,.t32,.t64{
+	background-color: purple;
+}
+.t128,.t256,.t512{
+	font-size: 1.2rem;
+	background-color: blue;
+	
+}
+.t1024,.t2048,.t4096,.t8192{
+	font-size: 0.9rem;
+	background-color: orange;
+}
+.t16384{
+	font-size: 0.7rem;
+	background-color: black;
 }
 .t8,.t16,.t32,.t64,.t128,.t256,.t512,.t1024,.t2048,.t4096,.t8192,.t16384{
 	color: white;
-	background-color: #AA0088;
 }

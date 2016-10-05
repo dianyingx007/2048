@@ -7,24 +7,46 @@
 		<script src="js/flexible.js"></script>
 	</head>
 	<body>
-		<p class="score">Score:<span>0</span></p>
-		<div class="container">
-			<div class="grid"></div>
-			<div class="grid"></div>
-			<div class="grid"></div>
-			<div class="grid"></div>
-			<div class="grid"></div>
-			<div class="grid t2">2</div>
-			<div class="grid"></div>
-			<div class="grid"></div>
-			<div class="grid"></div>
-			<div class="grid t8">8</div>
-			<div class="grid"></div>
-			<div class="grid"></div>
-			<div class="grid"></div>
-			<div class="grid t4">4</div>
-			<div class="grid"></div>
-			<div class="grid"></div>
+		<p class="score">Score:<span id="getscore">0</span></p>
+		<div class="game2048">
+			<div class="container">
+				<div class="grid"></div>
+				<div class="grid"></div>
+				<div class="grid"></div>
+				<div class="grid"></div>
+				<div class="grid"></div>
+				<div class="grid"></div>
+				<div class="grid"></div>
+				<div class="grid"></div>
+				<div class="grid"></div>
+				<div class="grid"></div>
+				<div class="grid"></div>
+				<div class="grid"></div>
+				<div class="grid"></div>
+				<div class="grid"></div>
+				<div class="grid"></div>
+				<div class="grid"></div>
+			</div>
+			<div class="container2">
+				<div id="c00" class="cell t2">2</div>
+				<div id="c01" class="cell t4">4</div>
+				<div id="c02" class="cell t8">8</div>
+				<div id="c03" class="cell t16">16</div>
+				<div id="c10" class="cell t32">32</div>
+				<div id="c11" class="cell t64">64</div>
+				<div id="c12" class="cell t128">128</div>
+				<div id="c13" class="cell t256">256</div>
+				<div id="c20" class="cell t512">512</div>
+				<div id="c21" class="cell t1024">1024</div>
+				<div id="c22" class="cell t2048">2048</div>
+				<div id="c23" class="cell t4096">4096</div>
+				<div id="c30" class="cell t8192">8192</div>
+				<div id="c31" class="cell t16384">16384</div>
+				<div id="c32" class="cell"></div>
+				<div id="c33" class="cell"></div>
+			</div>
 		</div>
+		
+		<script src="js/2048.js"></script>
 	</body>
 </html>
