@@ -15,7 +15,6 @@ body{
 .game2048{
 	height: 9rem;
 	position: relative;
-	top: 0px;
 }
 .container {
 	margin-left: 50%;
@@ -24,36 +23,61 @@ body{
 	height: 9rem;
 	background-color: #aa8e8e;
 	border-radius: 15px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	align-content: space-around;
 }
 .grid{
-	width: 1.81rem;
-	height: 1.81rem;
+	width: 1.8rem;
+	height: 1.8rem;
 	background-color: #cabdbd;
 	border-radius: 15px;
+	margin-left: 0.36rem;
+	margin-top: 0.36rem;
+	float: left;
 }
 .container2 {
 	margin-left: 50%;
 	transform: translate(-50%,0);
 	width: 9rem;
 	height: 9rem;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	align-content: space-around;
 	position: absolute;
 	top: 0px;
 }
 .cell{
-	width: 1.81rem;
-	height: 1.81rem;
-	background-color: #cabdbd;
+	width: 1.8rem;
+	height: 1.8rem;
 	border-radius: 15px;
 	font-size: 1.4rem;
-	line-height: 2rem;
+	line-height: 1.8rem;
+	position: absolute;
+}
+#c00,#c10,#c20,#c30{
+	left: 0.36rem;
+}
+#c01,#c11,#c21,#c31{
+	left: 2.52rem;
+}
+#c02,#c12,#c22,#c32{
+	left: 4.68rem;
+}
+#c03,#c13,#c23,#c33{
+	left: 6.84rem;
+}
+#c00,#c01,#c02,#c03{
+	top: 0.36rem;
+}
+#c10,#c11,#c12,#c13{
+	top: 2.52rem;
+}
+#c20,#c21,#c22,#c23{
+	top: 4.68rem;
+}
+#c30,#c31,#c32,#c33{
+	top: 6.84rem;
+}
+.t2{
+	background-color: #eeeedd;
+}
+.t4{
+	background-color: #eeee99;
 }
 .t8,.t16,.t32,.t64{
 	background-color: purple;
