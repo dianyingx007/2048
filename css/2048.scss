@@ -1,0 +1,196 @@
+$def_font:0.75rem;//默认字体大小
+$def_weight:900;//默认字体粗细
+$def_family:"微软雅黑";//默认字体
+$def_radius:10px;//默认圆角
+$score_top:1rem;//分数距离视口顶部的位置
+$container_width:9rem;//游戏框的大小，长宽
+$background_color:#aa8e8e;//游戏框背景颜色
+$grid_color:#cabdbd;//小方块颜色
+$grid_font:1.4rem;//默认小方块内字体大小
+$grid_font3:1.0rem;//小方块内3位数字体大小
+$grid_font4:0.75rem;//小方块内4位数字体大小
+$grid_font_color:white;//8及以上数字的字体颜色
+$color_2:#eeeedd;//2的颜色
+$color_4:#eeee99;//4的颜色
+$color_8:purple;//8的颜色
+$color_16:purple;//16的颜色
+$color_32:purple;//32的颜色
+$color_64:purple;
+$color_128:blue;
+$color_256:blue;
+$color_512:blue;
+$color_1024:orange;
+$color_2048:orange;
+$color_4096:orange;
+$color_8192:black;
+$gameover_bg_color:#555;//结束页面遮盖块背景颜色
+$gameover_bg_opacity:0.5;//结束页面遮盖块透明度
+$overmes_bg_color:white;//结束页面结束信息块背景颜色
+$ovarmes_f_size:0.8rem;//结束页面结束信息块字体大小
+$overmes_border:2px solid #eb5b5b;//结束页面结束信息块border
+$overmes_width:5rem;//结束页面结束信息块宽度
+$restart_color:#5e42e8;//结束页面重新开始按钮颜色
+@mixin container {
+    margin-left: 50%;
+    transform: translate(-50%,0);
+    width: $container_width;
+    height: $container_width;
+}
+@mixin grid{
+    width: $container_width*0.2;
+    height: $container_width*0.2;
+    border-radius: $def_radius;
+}
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+body {
+    text-align: center;
+    font-family: $def_family;
+}
+.score {
+    font-size: $def_font;
+    font-weight: $def_weight;
+    margin-top: $score_top;
+}
+.game2048 {
+    position: relative;
+}
+.container {
+    @include container;
+    background-color: $background_color;
+    border-radius: $def_radius;
+}
+.grid {
+    @include grid;
+    background-color: $grid_color;
+    margin:{
+        left: $container_width/25;
+        top: $container_width/25;
+    };
+    float:left;
+}
+.container2{
+    @include container;
+    position: absolute;
+    top: 0;
+}
+.cell {
+    @include grid;
+    font-size: $grid_font;
+    line-height: $container_width*0.2;
+    position: absolute;
+}
+#c00,#c10,#c20,#c30{
+    left: $container_width*0.04;
+}
+#c01,#c11,#c21,#c31{
+    left: $container_width*0.28;
+}
+#c02,#c12,#c22,#c32{
+    left: $container_width*0.52;
+}
+#c03,#c13,#c23,#c33{
+    left: $container_width*0.76;
+}
+#c00,#c01,#c02,#c03{
+    top: $container_width*0.04;
+}
+#c10,#c11,#c12,#c13{
+    top: $container_width*0.28
+}
+#c20,#c21,#c22,#c23{
+    top: $container_width*0.52;
+}
+#c30,#c31,#c32,#c33{
+    top: $container_width*0.76;
+}
+.t2{
+    background-color: $color_2;
+}
+.t4{
+    background-color: $color_4;
+}
+.t8{
+    background-color: $color_8;
+}
+.t16{
+    background-color: $color_16;
+}
+.t32{
+    background-color: $color_32;
+}
+.t64{
+    background-color: $color_64;
+}
+.t128{
+    background-color: $color_128;
+    font-size: $grid_font3;
+}
+.t256{
+    background-color: $color_256;
+    font-size: $grid_font3;
+}
+.t512{
+    background-color: $color_512;
+    font-size: $grid_font3;
+}
+.t1024{
+    background-color: $color_1024;
+    font-size: $grid_font4;
+}
+.t2048{
+    background-color: $color_2048;
+    font-size: $grid_font4;
+}
+.t4096{
+    background-color: $color_4096;
+    font-size: $grid_font4;
+}
+.t8192{
+    background-color: $color_8192;
+    font-size: $grid_font4;
+}
+.t8,.t16,.t32,.t64,.t128,.t256,.t512,.t1024,.t2048,.t4096,.t8192,.t16384{
+    color: $grid_font_color;
+}
+#gameover{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.transparent{
+    background-color: $gameover_bg_color;
+    opacity: $gameover_bg_opacity;
+    width: 100%;
+    height: 100%;
+}
+.overmessage{
+    background-color: $overmes_bg_color;
+    border: $overmes_border;
+    border-radius: $def_radius;
+    width: $overmes_width;
+    font:{
+        size: $ovarmes_f_size;
+        weight:$def_weight;
+    };
+    padding:0.2rem 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+#restart{
+    font:{
+        size: 0.7rem;
+        weight:700;
+    };
+    border:2px solid lighten($restart_color,10%);
+    border-radius: $def_radius;
+    background-color: $restart_color;
+    cursor: pointer;
+}
