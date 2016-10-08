@@ -8,3 +8,9 @@ restart.addEventListener("touchstart",function(){
 	event.stopPropagation();
 	game.start();
 },false);
+restart.addEventListener("touchmove",function(){
+	event.stopPropagation();
+},false);
+restart.addEventListener("touchend",function(){
+	event.stopPropagation();
+},false);

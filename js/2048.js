@@ -352,6 +352,12 @@ restart.addEventListener("touchstart",function(){
 	event.stopPropagation();
 	game.start();
 },false);
+restart.addEventListener("touchmove",function(){
+	event.stopPropagation();
+},false);
+restart.addEventListener("touchend",function(){
+	event.stopPropagation();
+},false);
 //移动端控制事件
 var init = {minx:20,miny:20,sx:0,sy:0,ex:0,ey:0};//minx,miny限定多少才算移动
 document.addEventListener("touchstart",function(){
